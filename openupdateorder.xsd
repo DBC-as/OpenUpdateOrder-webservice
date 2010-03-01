@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ouo="http://oss.dbc.dk/ns/openupdateorder" targetNamespace="http://oss.dbc.dk/ns/openupdateorder" elementFormDefault="qualified">
+	<xs:element name="closeOrderRequest">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The service request for changing an order's status to closed</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ouo:authentication" minOccurs="0"/>
+				<xs:element ref="ouo:callback" minOccurs="0"/>
+				<xs:element ref="ouo:order"/>
+				<xs:element ref="ouo:outputType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="closeOrderResponse">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The service response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="ouo:error"/>
+				<xs:element ref="ouo:orderClosed"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="authentication">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Parameters used for authentication purposes</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ouo:groupIdAut"/>
+				<xs:element ref="ouo:passwordAut"/>
+				<xs:element ref="ouo:userIdAut"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="callback" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If outputType=json.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="error" type="ouo:errorType"/>
+		<xs:annotation>
+			<xs:documentation xml:lang="en">If outputType=json.</xs:documentation>
+		</xs:annotation>
+	<xs:element name="groupIdAut">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="order">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifier of an order</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="orderClosed" type="xs:string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Message that the order's status has been changed to closed</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="outputType" type="ouo:outputTypeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">E.g. xml, json or php.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="passwordAut">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Password (for authentication purposes)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="userIdAut">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">User identifier (for authentication purposes)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="errorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Possible types of errors.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="service not available"/>
+			<xs:enumeration value="no orders found"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="outputTypeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The types of output that can be returned by the service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="xml"/>
+			<xs:enumeration value="json"/>
+			<xs:enumeration value="php"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
