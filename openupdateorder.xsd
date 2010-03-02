@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 (http://www.altova.com) by Dansk Bibliotekscenter A/S (Dansk Bibliotekscenter A/S) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ouo="http://oss.dbc.dk/ns/openupdateorder" targetNamespace="http://oss.dbc.dk/ns/openupdateorder" elementFormDefault="qualified">
 	<xs:element name="closeOrderRequest">
 		<xs:annotation>
@@ -42,9 +43,6 @@
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="error" type="ouo:errorType"/>
-		<xs:annotation>
-			<xs:documentation xml:lang="en">If outputType=json.</xs:documentation>
-		</xs:annotation>
 	<xs:element name="groupIdAut">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
@@ -81,7 +79,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="service not available"/>
-			<xs:enumeration value="no orders found"/>
+			<xs:enumeration value="order not found"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="outputTypeType">
