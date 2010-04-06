@@ -10,6 +10,7 @@
 				<xs:element ref="ouo:authentication" minOccurs="0"/>
 				<xs:element ref="ouo:callback" minOccurs="0"/>
 				<xs:element ref="ouo:orderId"/>
+				<xs:element ref="ouo:requesterAgencyId"/>
 				<xs:element ref="ouo:outputType" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
@@ -27,17 +28,15 @@
 	</xs:element>
 	<xs:element name="resendRequest">
 		<xs:annotation>
-			<xs:documentation>The service request for having an order reciept resent to requester or responser</xs:documentation>
+			<xs:documentation>The service request for having an order message resent to requester or responder</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="ouo:authentication" minOccurs="0"/>
 				<xs:element ref="ouo:callback" minOccurs="0"/>
+				<xs:element ref="ouo:messageType"/>
 				<xs:element ref="ouo:orderId"/>
-				<xs:choice>
-					<xs:element ref="ouo:responderId"/>
-					<xs:element ref="ouo:requesterId"/>
-				</xs:choice>
+				<xs:element ref="ouo:requesterAgencyId"/>
 				<xs:element ref="ouo:outputType" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
@@ -49,7 +48,7 @@
 		<xs:complexType>
 			<xs:choice>
 				<xs:element ref="ouo:error"/>
-				<xs:element ref="ouo:resent"/>
+				<xs:element ref="ouo:resendStatus"/>
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
@@ -76,9 +75,10 @@
 			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="messageType" type="ouo:messageTypeType"/>
 	<xs:element name="orderId">
 		<xs:annotation>
-			<xs:documentation xml:lang="en">Identifier of an order</xs:documentation>
+			<xs:documentation xml:lang="en">An order.s unique number. Orders from Netpunkt/bibliotek.dk are given a number by ORS, while orders from other systems (e.g. from z39.50-clients) are given numbers by those systems (in z-ill: transaction-qualifier). Orders received via NCIP are numbered by ORS with a UniqueRequestId, qualified with a UniqueAgencyId. Orders numbered by ORS have the interval: 1000000000-2000000000 . numbered orders from other systems must not use numbers in that interval. orderId (+requesterId) is the Primary key to an order.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="orderClosed" type="xs:string">
@@ -96,12 +96,12 @@
 			<xs:documentation xml:lang="en">Password (for authentication purposes)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="requesterId" type="xs:string">
+	<xs:element name="requesterAgencyId" type="xs:string">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">This is the ISIL-nr of the library that sends the order. Main library/branches: requesterId can either be a main library or a branch. If the library prefers the main library, or a specific branch to be their default requesterID, the chosen branch’s/library’s ISIL-number must be declared in OpenAgency. In these cases ORS will use the chosen ISIL as the requesterId, and the actual sender as pickUpAgency. pickUpAgency always represents the users chosen library, whether it is the main library or a branch. (orderId+) requesterId is the Primary key of the order.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="resent">
+	<xs:element name="resendStatus">
 		<xs:annotation>
 			<xs:documentation>Confirmation that an order reciept has been sent again to requester or responder</xs:documentation>
 		</xs:annotation>
@@ -123,6 +123,13 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="service not available"/>
 			<xs:enumeration value="order not found"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="messageTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="orsEndUserRequest"/>
+			<xs:enumeration value="orsInterLibraryRequest"/>
+			<xs:enumeration value="orsReciept"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="outputTypeType">
