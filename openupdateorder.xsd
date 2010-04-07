@@ -28,7 +28,7 @@
 	</xs:element>
 	<xs:element name="resendRequest">
 		<xs:annotation>
-			<xs:documentation>The service request for having an order message resent to requester or responder</xs:documentation>
+			<xs:documentation xml:lang="en">The service request for having an order message resent to requester or responder</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -43,7 +43,7 @@
 	</xs:element>
 	<xs:element name="resendResponse">
 		<xs:annotation>
-			<xs:documentation>The service response</xs:documentation>
+			<xs:documentation xml:lang="en">The service response</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:choice>
@@ -75,7 +75,11 @@
 			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="messageType" type="ouo:messageTypeType"/>
+	<xs:element name="messageType" type="ouo:messageTypeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifier of the type (and reciever) of an order message</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 	<xs:element name="orderId">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">An order.s unique number. Orders from Netpunkt/bibliotek.dk are given a number by ORS, while orders from other systems (e.g. from z39.50-clients) are given numbers by those systems (in z-ill: transaction-qualifier). Orders received via NCIP are numbered by ORS with a UniqueRequestId, qualified with a UniqueAgencyId. Orders numbered by ORS have the interval: 1000000000-2000000000 . numbered orders from other systems must not use numbers in that interval. orderId (+requesterId) is the Primary key to an order.</xs:documentation>
@@ -126,6 +130,9 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="messageTypeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Types of order messages. orsEndUserRequests and orsReciepts are for the requester agency, orsInterLibraryRequests are for the responder library</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="orsEndUserRequest"/>
 			<xs:enumeration value="orsInterLibraryRequest"/>
