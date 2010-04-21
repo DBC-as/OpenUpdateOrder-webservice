@@ -127,6 +127,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="service not available"/>
 			<xs:enumeration value="order not found"/>
+			<xs:enumeration value="authentication_error"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="messageTypeType">
