@@ -75,10 +75,13 @@
 			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="messageType" type="ouo:messageTypeType">
+	<xs:element name="messageType">
 		<xs:annotation>
-			<xs:documentation xml:lang="en">Identifier of the type (and reciever) of an order message</xs:documentation>
+			<xs:documentation xml:lang="en">Identifier of the type (and receiver) of an order message</xs:documentation>
 		</xs:annotation>
+		<xs:simpleType>
+			<xs:list itemType="ouo:messageTypeType"/>
+		</xs:simpleType>
 	</xs:element>
 	<xs:element name="orderId">
 		<xs:annotation>
@@ -132,12 +135,12 @@
 	</xs:simpleType>
 	<xs:simpleType name="messageTypeType">
 		<xs:annotation>
-			<xs:documentation xml:lang="en">Types of order messages. orsEndUserRequests and orsReciepts are for the requester agency, orsInterLibraryRequests are for the responder library</xs:documentation>
+			<xs:documentation xml:lang="en">Types of order messages. orsEndUserRequests and orsReceipts are for the requester agency, orsInterLibraryRequests are for the responder library</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="orsEndUserRequest"/>
 			<xs:enumeration value="orsInterLibraryRequest"/>
-			<xs:enumeration value="orsReciept"/>
+			<xs:enumeration value="orsReceipt"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="outputTypeType">
