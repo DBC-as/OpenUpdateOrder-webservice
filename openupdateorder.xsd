@@ -70,7 +70,7 @@
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="error" type="ouo:errorType"/>
-	<xs:element name="groupIdAut">
+	<xs:element name="groupIdAut" type="xs:string">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">Identifier of the group (most often a library number) the user belongs to (for authentication purposes)</xs:documentation>
 		</xs:annotation>
@@ -98,7 +98,7 @@
 			<xs:documentation xml:lang="en">E.g. xml, json or php.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="passwordAut">
+	<xs:element name="passwordAut" type="xs:string">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">Password (for authentication purposes)</xs:documentation>
 		</xs:annotation>
@@ -118,7 +118,7 @@
 			<xs:documentation xml:lang="en">responderId is the ISIL-number of the library/agency that can provide the requested item.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="userIdAut">
+	<xs:element name="userIdAut" type="xs:string">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">User identifier (for authentication purposes)</xs:documentation>
 		</xs:annotation>
